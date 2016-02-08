@@ -1,6 +1,6 @@
 # Arms
 
-This section should cover the collection of arms that potential combatants would bring to bear immediately and those possible to develop in media reis. The collection should include, but not necessarily be limited to:
+This section should cover the collection of arms that potential combatants would bring to bear immediately and those possible to develop in media res. The collection should include, but not necessarily be limited to:
 
 - Nuclear weapons
 - Biological weapons (see The Dead Hand)
