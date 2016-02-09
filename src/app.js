@@ -24,35 +24,78 @@
     var html, md;
     if (path.indexOf('.html') > -1) {html = true;}
     if (path.indexOf('.md') > -1) {md = true;}
-    
+
     if (html) {
       d3.html(path, function (data) {
         app.sectionHTMLFragments[index] = data;
         app.sectionsLoaded++;
         if (app.sectionsLoaded >= app.sectionPaths.length) {
-          app.write(app.sectionHTMLFragments);
+          app.render(app.sectionHTMLFragments);
         }
       });
     } else if (md) {
       d3.text(path, function (data) {
         var node = document.createElement('template');
-        node.innerHTML = marked(data);
+        node.innerHTML = '<div class="card">' + marked(data) + '</div>';
         var fragment = node.content;
         app.sectionHTMLFragments[index] = fragment;
         app.sectionsLoaded++;
         if (app.sectionsLoaded >= app.sectionPaths.length) {
-          app.write(app.sectionHTMLFragments);
+          app.render(app.sectionHTMLFragments);
         }
       });
     }
   };
 
-  app.write = function (HTMLFragments) {
+  app.render = function (HTMLFragments) {
+    d3.select('body').append('div').classed('container', true);
     for (var i = 0; i < HTMLFragments.length; i++) {
-      d3.select("body")
+      d3.select(".container")
         .node()
         .appendChild(HTMLFragments[i]);
     }
+
+    app.afterRender();
+  };
+
+  app.beforeRender = function () {
+    return true;
+  };
+
+  app.afterRender = function () {
+    var height = window.innerHeight / 2;
+    var width = 860;
+
+    var projection = d3.geo.equirectangular();
+    projection.center([65, 20]);
+    projection.scale(280);
+
+    var svg = d3.select(".antebellum-map").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+    var path = d3.geo.path()
+      .projection(projection);
+    var g = svg.append("g");
+
+    d3.json("./lib/world-110m2.json", function(error, topology) {
+      g.selectAll("path")
+      .data(topojson.object(topology, topology.objects.countries)
+        .geometries)
+      .enter()
+      .append("path")
+      .attr("d", path)
+    }); 
+    
+    var zoom = d3.behavior.zoom()
+      .on("zoom", function() {
+        g.attr("transform", "translate("+ d3.event.translate.join(",") + ")scale(" + d3.event.scale + ")");
+        g.selectAll("circle")
+          .attr("d", path.projection(projection));
+        g.selectAll("path")  
+          .attr("d", path.projection(projection)); 
+      });
+    
+    svg.call(zoom);      
   };
 
   window.app = app;
