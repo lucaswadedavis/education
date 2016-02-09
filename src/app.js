@@ -48,9 +48,17 @@
   };
 
   app.render = function (HTMLFragments) {
-    d3.select('body').append('div').classed('container', true);
+    var body = d3.select('body');
+    body.append('div').classed('container', true);
+    var container = d3.select('.container');
+    container.append('img')
+      .attr('width', 80)
+      .attr('height', 80)
+      .style('margin-bottom', -60)
+      .attr('src', './images/hellfire-bw.png');
+    
     for (var i = 0; i < HTMLFragments.length; i++) {
-      d3.select(".container")
+      container
         .node()
         .appendChild(HTMLFragments[i]);
     }
