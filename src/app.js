@@ -47,36 +47,13 @@
     }
   };
 
-  app.render = function (HTMLFragments) {
-    var body = d3.select('body');
-    body.append('div').classed('container', true);
-    var container = d3.select('.container');
-    container.append('img')
-      .attr('width', 80)
-      .attr('height', 80)
-      .style('margin-bottom', -60)
-      .attr('src', './images/hellfire-bw.png');
-    
-    for (var i = 0; i < HTMLFragments.length; i++) {
-      container
-        .node()
-        .appendChild(HTMLFragments[i]);
-    }
-
-    app.afterRender();
-  };
-
-  app.beforeRender = function () {
-    return true;
-  };
-
-  app.afterRender = function () {
-    var height = window.innerHeight / 2;
+  app.activateMap = function () {
+    var height = window.innerHeight / 3;
     var width = 860;
 
     var projection = d3.geo.equirectangular();
-    projection.center([65, 20]);
-    projection.scale(280);
+    projection.center([45, -10]);
+    projection.scale(200);
 
     var svg = d3.select(".antebellum-map").append("svg")
       .attr("width", width)
@@ -103,7 +80,34 @@
           .attr("d", path.projection(projection)); 
       });
     
-    svg.call(zoom);      
+    svg.call(zoom);
+  };
+
+  app.render = function (HTMLFragments) {
+    var body = d3.select('body');
+    body.append('div').classed('container', true);
+    var container = d3.select('.container');
+    container.append('img')
+      .attr('width', 88)
+      .attr('height', 80)
+      .style('margin-bottom', -60)
+      .attr('src', './images/hellfire-bw.png');
+    
+    for (var i = 0; i < HTMLFragments.length; i++) {
+      container
+        .node()
+        .appendChild(HTMLFragments[i]);
+    }
+
+    app.afterRender();
+  };
+
+  app.beforeRender = function () {
+    return true;
+  };
+
+  app.afterRender = function () {
+    app.activateMap();
   };
 
   window.app = app;
