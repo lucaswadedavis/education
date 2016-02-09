@@ -1,7 +1,7 @@
 {
   "paths": [
     "./sections/potential-combatants.html",
-    "./sections/arms.html",
+    "./sections/arms.md",
     "./sections/duration.html"
   ]
 }
