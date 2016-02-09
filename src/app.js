@@ -52,7 +52,7 @@
     var width = 860;
 
     var projection = d3.geo.equirectangular();
-    projection.center([45, -10]);
+    projection.center([38, -5]);
     projection.scale(200);
 
     var svg = d3.select(".antebellum-map").append("svg")
@@ -88,9 +88,9 @@
     body.append('div').classed('container', true);
     var container = d3.select('.container');
     container.append('img')
-      .attr('width', 88)
-      .attr('height', 80)
-      .style('margin-bottom', -60)
+      .attr('width', 70)
+      .attr('height', 65)
+      .style('margin-bottom', -55)
       .attr('src', './images/hellfire-bw.png');
     
     for (var i = 0; i < HTMLFragments.length; i++) {
