@@ -2,8 +2,6 @@
   "paths": [
     "./sections/introduction.md",
     "./sections/map.html",
-    "./sections/potential-combatants.html",
-    "./sections/arms.md",
-    "./sections/duration.html"
+    "./sections/git-hooks.md"
   ]
 }

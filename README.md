@@ -1,5 +1,3 @@
-# Antebellum
+# Education
 
-Antebellum is an essay about the potential of a war to end civilization, collaboratively written and edited on GitHub.
-
-Sections (which can be either html fragments or markdown) are loaded from the /sections directory using the list in /src/sections.json by d3.
+A public record of things I've read, watched, and learned, and a reminder of things yet incomplete on that list.

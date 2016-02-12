@@ -35,10 +35,7 @@
       });
     } else if (md) {
       d3.text(path, function (data) {
-        var node = document.createElement('template');
-        node.innerHTML = '<div class="card">' + marked(data) + '</div>';
-        var fragment = node.content;
-        app.sectionHTMLFragments[index] = fragment;
+        app.sectionHTMLFragments[index] = markdownToFragment(data);
         app.sectionsLoaded++;
         if (app.sectionsLoaded >= app.sectionPaths.length) {
           app.render(app.sectionHTMLFragments);
@@ -70,16 +67,16 @@
       .append("path")
       .attr("d", path)
     }); 
-    
+
     var zoom = d3.behavior.zoom()
       .on("zoom", function() {
         g.attr("transform", "translate("+ d3.event.translate.join(",") + ")scale(" + d3.event.scale + ")");
         g.selectAll("circle")
-          .attr("d", path.projection(projection));
-        g.selectAll("path")  
-          .attr("d", path.projection(projection)); 
+        .attr("d", path.projection(projection));
+      g.selectAll("path")  
+        .attr("d", path.projection(projection)); 
       });
-    
+
     svg.call(zoom);
   };
 
@@ -92,7 +89,7 @@
       .attr('height', 65)
       .style('margin-bottom', -55)
       .attr('src', './images/hellfire-bw.png');
-    
+
     for (var i = 0; i < HTMLFragments.length; i++) {
       container
         .node()
@@ -108,6 +105,12 @@
 
   app.afterRender = function () {
     app.activateMap();
+  };
+
+  function markdownToFragment (markdownString) {
+    var node = document.createElement('template');
+    node.innerHTML = '<div class="card">' + marked(markdownString) + '</div>';
+    return node.content;
   };
 
   window.app = app;
