@@ -7,11 +7,11 @@
   app.sectionsLoaded = 0;
 
   app.getSections = function () {
-    var sectionPaths = './src/sections.json';
-    d3.json(sectionPaths, function (data) {
-      app.sectionPaths = data.paths;
+    var sectionPaths = './src/sections.txt';
+    d3.text(sectionPaths, function (data) {
+      app.sectionPaths = data.split('\n').filter(function(n) {return !!n;});
       for (var i = 0; i < app.sectionPaths.length; i++) {
-        app.loadHTMLFragment(app.sectionPaths[i], i);
+        app.loadHTMLFragment('sections/' + app.sectionPaths[i], i);
       }
     });
   };
