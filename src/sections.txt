@@ -1,4 +1,5 @@
 2016-02-11-introduction.md
 2016-02-12-close-github-issue-with-commit.md
 2016-02-12-git-hooks.md
+2016-02-12-propositions-as-types.md
 2016-02-13-map.html
