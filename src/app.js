@@ -85,10 +85,10 @@
     body.append('div').classed('container', true);
     var container = d3.select('.container');
     container.append('img')
-      .attr('width', 70)
-      .attr('height', 65)
-      .style('margin-bottom', -55)
-      .attr('src', './images/hellfire-bw.png');
+      .attr('width', 80)
+      .attr('height', 80)
+      .style('margin-bottom', -60)
+      .attr('src', './images/logo.png');
 
     for (var i = 0; i < HTMLFragments.length; i++) {
       container
