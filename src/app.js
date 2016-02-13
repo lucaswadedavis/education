@@ -17,6 +17,7 @@
   };
 
   app.init = function () {
+    app.displayIntro();
     app.getSections();
   };
 
@@ -43,6 +44,29 @@
       });
     }
   };
+
+  app.displayIntro = function () {
+    $("body").append('<div id="intro-overlay"><h1>EDUCATION</h1></div>');
+    $("#intro-overlay h1").textillate({
+      loop: true,
+      minDisplayTime: 500,
+      in: {
+        effect: 'fadeInUp',
+        shuffle: true
+      },
+      out: {
+        effect: 'fadeOutUp',
+        shuffle: true,
+        callback: function () {
+          $("#intro-overlay h1").hide();
+          $("#intro-overlay").fadeOut(function () {
+            $(this).remove();
+          });
+        }
+      }
+    });
+  };
+
 
   app.activateMap = function () {
     var height = window.innerHeight / 3;
